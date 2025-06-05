@@ -46,9 +46,10 @@
       const responseBox = document.getElementById("response");
       responseBox.textContent = "Thinking...";
 
-      // --- Gemini API Configuration (UPDATED) ---
+      // --- Gemini API Configuration (UPDATED MODEL) ---
       const GEMINI_API_KEY = "AIzaSyCXylKEUGUW7s3YNgQfcQvJrsAsmkAGgSU"; // Your Gemini API Key
-      const GEMINI_MODEL = "gemini-pro"; // You can use "gemini-pro", "gemini-1.5-flash", etc.
+      // Changed from "gemini-pro" to a model known to work with the v1beta generateContent endpoint
+      const GEMINI_MODEL = "gemini-1.5-flash"; // Or "gemini-1.0-pro" if you prefer, or "gemini-pro-vision" if you add image support
       const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
       // --- End Gemini API Configuration ---
 
@@ -57,7 +58,6 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // The "Authorization" header is not used for Gemini API keys passed as query parameters
           },
           body: JSON.stringify({
             contents: [{
