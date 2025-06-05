@@ -15,6 +15,46 @@
         .container {
             max-width: 1200px;
         }
+        /* Modal specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2.5rem;
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            position: relative;
+            max-width: 90%;
+            width: 400px;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #aaa;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -27,6 +67,7 @@
                     <li><a href="#" class="hover:text-blue-200 transition duration-300 ease-in-out font-medium">Home</a></li>
                     <li><a href="#about" class="hover:text-blue-200 transition duration-300 ease-in-out font-medium">About</a></li>
                     <li><a href="#contact" class="hover:text-blue-200 transition duration-300 ease-in-out font-medium">Contact</a></li>
+                    <li><a href="#" id="loginBtn" class="hover:text-blue-200 transition duration-300 ease-in-out font-medium">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -71,6 +112,37 @@
                 </div>
             </div>
         </section>
+
+        <!-- Admin Dashboard Section (initially hidden) -->
+        <section id="adminDashboard" class="bg-gradient-to-r from-purple-100 to-pink-100 p-8 rounded-xl shadow-lg mt-8 hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-semibold text-gray-900">Admin Dashboard</h2>
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out shadow-md">
+                    Logout
+                </button>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-inner mb-6">
+                <h3 class="text-2xl font-medium mb-4 text-gray-800">Account Information (Simulated)</h3>
+                <p class="text-lg text-gray-700"><strong>Username:</strong> admin</p>
+                <p class="text-lg text-gray-700"><strong>Email:</strong> admin@example.com</p>
+                <p class="text-lg text-gray-700 mt-2">
+                    This information is static for demonstration purposes. In a real application, this would be fetched from a database.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-inner">
+                <h3 class="text-2xl font-medium mb-4 text-gray-800">Edit Website Content (Simulated)</h3>
+                <label for="siteContent" class="block text-lg font-medium text-gray-700 mb-2">Main Site Content:</label>
+                <textarea id="siteContent" rows="8" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800"></textarea>
+                <p class="text-sm text-gray-500 mt-2">
+                    Changes made here are purely visual and will not persist after refreshing the page or navigating away, as this is a client-side only demonstration.
+                </p>
+                <button id="saveContentBtn" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out shadow-md">
+                    Save Simulated Content
+                </button>
+                <div id="saveMessage" class="mt-3 text-green-600 font-semibold hidden">Content saved visually!</div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer Section -->
@@ -79,5 +151,118 @@
             &copy; 2024 My Awesome Site. All rights reserved.
         </div>
     </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalBtn">&times;</span>
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-900">Admin Login</h2>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+                    <input type="text" id="username" name="username" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-blue-500" placeholder="Enter your username" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password:</label>
+                    <input type="password" id="password" name="password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-blue-500" placeholder="******************" required>
+                </div>
+                <div id="loginError" class="text-red-500 text-center text-sm mb-4 hidden">Invalid username or password.</div>
+                <div class="flex items-center justify-center">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out shadow-md">
+                        Log In
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const loginBtn = document.getElementById('loginBtn');
+            const loginModal = document.getElementById('loginModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const loginForm = document.getElementById('loginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const loginError = document.getElementById('loginError');
+            const adminDashboard = document.getElementById('adminDashboard');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const saveContentBtn = document.getElementById('saveContentBtn');
+            const siteContentTextarea = document.getElementById('siteContent');
+            const saveMessage = document.getElementById('saveMessage');
+
+            // Hardcoded credentials (HIGHLY INSECURE for real applications)
+            const ADMIN_USERNAME = 'admin';
+            const ADMIN_PASSWORD = 'dsfalkjsjdfjklasdjkf34'; // The password you provided
+
+            // Function to show the login modal
+            function showLoginModal() {
+                loginModal.style.display = 'flex';
+                // Reset form and error message
+                loginForm.reset();
+                loginError.classList.add('hidden');
+            }
+
+            // Function to hide the login modal
+            function hideLoginModal() {
+                loginModal.style.display = 'none';
+            }
+
+            // Event listener for "Login" button in header
+            loginBtn.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                showLoginModal();
+            });
+
+            // Event listener for closing the modal using the 'x' button
+            closeModalBtn.addEventListener('click', hideLoginModal);
+
+            // Event listener for closing the modal when clicking outside of it
+            window.addEventListener('click', function(event) {
+                if (event.target === loginModal) {
+                    hideLoginModal();
+                }
+            });
+
+            // Event listener for login form submission
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const enteredUsername = usernameInput.value;
+                const enteredPassword = passwordInput.value;
+
+                if (enteredUsername === ADMIN_USERNAME && enteredPassword === ADMIN_PASSWORD) {
+                    // Successful login
+                    hideLoginModal();
+                    adminDashboard.classList.remove('hidden'); // Show the admin dashboard
+                    loginError.classList.add('hidden'); // Hide any previous error
+                    // Optionally, you could load "editable" content into the textarea here
+                    // For this demo, it starts empty, but you could fetch content if you had a backend
+                } else {
+                    // Failed login
+                    loginError.classList.remove('hidden'); // Show error message
+                }
+            });
+
+            // Event listener for logout button
+            logoutBtn.addEventListener('click', function() {
+                adminDashboard.classList.add('hidden'); // Hide the admin dashboard
+                // Optionally clear any sensitive data or state here
+                saveMessage.classList.add('hidden'); // Hide save message on logout
+            });
+
+            // Event listener for saving simulated content
+            saveContentBtn.addEventListener('click', function() {
+                // In a real application, you would send siteContentTextarea.value to a backend
+                // This is just a visual confirmation for the client-side demo
+                console.log('Simulated content saved:', siteContentTextarea.value);
+                saveMessage.classList.remove('hidden');
+                setTimeout(() => {
+                    saveMessage.classList.add('hidden');
+                }, 3000); // Hide message after 3 seconds
+            });
+        });
+    </script>
 </body>
 </html>
