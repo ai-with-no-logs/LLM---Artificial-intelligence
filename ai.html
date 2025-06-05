@@ -46,10 +46,9 @@
       const responseBox = document.getElementById("response");
       responseBox.textContent = "Thinking...";
 
-      // --- Gemini API Configuration (UPDATED MODEL) ---
-      const GEMINI_API_KEY = "AIzaSyCXylKEUGUW7s3YNgQfcQvJrsAsmkAGgSU"; // Your Gemini API Key
-      // Changed from "gemini-pro" to a model known to work with the v1beta generateContent endpoint
-      const GEMINI_MODEL = "gemini-1.5-flash"; // Or "gemini-1.0-pro" if you prefer, or "gemini-pro-vision" if you add image support
+      // --- Gemini API Configuration (UPDATED with new API Key) ---
+      const GEMINI_API_KEY = "AIzaSyApvB6dA1q8A_AMjVI-iY3Zo-1QypISajQ"; // <-- YOUR NEW API KEY IS HERE
+      const GEMINI_MODEL = "gemini-1.5-flash"; // Generally recommended for front-end text-only chat
       const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
       // --- End Gemini API Configuration ---
 
