@@ -1,75 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advanced AIs - AI</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f3f4f6;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced AIs - AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+    }
+  </style>
 </head>
 <body class="min-h-screen flex flex-col">
-  <!-- Header -->
-  <header class="bg-blue-600 shadow-lg text-white p-4">
-    <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
-      <div class="text-2xl font-bold mb-4 md:mb-0">Advanced AIs</div>
-      <div class="flex space-x-6">
-        <a href="https://ai-with-no-logs.github.io/LLM---Artificial-intelligence/home" class="text-white hover:text-blue-200 transition duration-300">Home</a>
-        <a href="javascript:void(0);" class="text-white hover:text-blue-200 transition duration-300">About</a>
-        <a href="https://ai-with-no-logs.github.io/LLM---Artificial-intelligence/homee" class="text-white hover:text-blue-200 transition duration-300">Contact</a>
-        <a href="https://ai-with-no-logs.github.io/LLM---Artificial-intelligence/ai" class="text-white hover:text-blue-200 transition duration-300" target="_blank" rel="noopener noreferrer">AI</a>
-      </div>
-    </nav>
-  </header>
+    <header class="bg-blue-600 shadow-lg text-white p-4">
+    <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+      <div class="text-2xl font-bold mb-4 md:mb-0">Advanced AIs</div>
+      <div class="flex space-x-6">
+        <a href="https://ai-with-no-logs.github.io/LLM---Artificial-intelligence/home" class="text-white hover:text-blue-200 transition duration-300">Home</a>
+        <a href="javascript:void(0);" class="text-white hover:text-blue-200 transition duration-300">About</a>
+        <a href="https://ai-with-no-logs.github.io/LLM---Artificial-intelligence/homee" class="text-white hover:text-blue-200 transition duration-300">Contact</a>
+        <a href="https://ai-with-no-logs.github.io/LLM---Artificial-intelligence/ai" class="text-white hover:text-blue-200 transition duration-300" target="_blank" rel="noopener noreferrer">AI</a>
+      </div>
+    </nav>
+  </header>
 
-  <!-- Main AI Chat Area -->
-  <main class="flex-grow container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-4 text-center">Talk to the AI</h1>
-    <div class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto space-y-4">
-      <input id="userInput" type="text" placeholder="Type your question here..." class="w-full p-2 border rounded" />
-      <button onclick="askAI()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ask</button>
-      <div id="response" class="bg-gray-100 p-4 rounded h-40 overflow-y-auto whitespace-pre-wrap"></div>
-    </div>
-  </main>
+    <main class="flex-grow container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-4 text-center">Talk to the AI</h1>
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto space-y-4">
+      <input id="userInput" type="text" placeholder="Type your question here..." class="w-full p-2 border rounded" />
+      <button onclick="askAI()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ask</button>
+      <div id="response" class="bg-gray-100 p-4 rounded h-40 overflow-y-auto whitespace-pre-wrap"></div>
+    </div>
+  </main>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white p-6 shadow-inner mt-auto">
-    <div class="container mx-auto text-center">
-      <div class="text-lg">© 2025 Advanced AIs</div>
-    </div>
-  </footer>
+    <footer class="bg-gray-800 text-white p-6 shadow-inner mt-auto">
+    <div class="container mx-auto text-center">
+      <div class="text-lg">© 2025 Advanced AIs</div>
+    </div>
+  </footer>
 
-  <!-- AI Chat Script -->
-  <script>
-    async function askAI() {
-      const input = document.getElementById("userInput").value;
-      const responseBox = document.getElementById("response");
-      responseBox.textContent = "Thinking...";
+    <script>
+    async function askAI() {
+      const input = document.getElementById("userInput").value;
+      const responseBox = document.getElementById("response");
+      responseBox.textContent = "Thinking...";
 
-      try {
-        const res = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "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"  // ⚠️ Replace this!
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: input }]
-          })
-        });
+      // --- Gemini API Configuration (UPDATED) ---
+      const GEMINI_API_KEY = "AIzaSyCXylKEUGUW7s3YNgQfcQvJrsAsmkAGgSU"; // Your Gemini API Key
+      const GEMINI_MODEL = "gemini-pro"; // You can use "gemini-pro", "gemini-1.5-flash", etc.
+      const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+      // --- End Gemini API Configuration ---
 
-        const data = await res.json();
-        responseBox.textContent = data.choices[0].message.content;
-      } catch (err) {
-        responseBox.textContent = "There was an error talking to the AI.";
-        console.error(err);
-      }
-    }
-  </script>
+      try {
+        const res = await fetch(GEMINI_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // The "Authorization" header is not used for Gemini API keys passed as query parameters
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: input
+              }]
+            }]
+          })
+        });
+
+        const data = await res.json();
+
+        // Check if the response contains content and parts from Gemini
+        if (data.candidates && data.candidates.length > 0 && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts.length > 0) {
+          responseBox.textContent = data.candidates[0].content.parts[0].text;
+        } else if (data.error) {
+            // Display specific error from Gemini API if available
+            responseBox.textContent = `API Error: ${data.error.message || 'Unknown error'}`;
+            console.error("Gemini API Error:", data.error);
+        }
+        else {
+            responseBox.textContent = "No valid response from AI. Please try again.";
+            console.log("Unexpected AI response structure:", data);
+        }
+      } catch (err) {
+        responseBox.textContent = "There was an error talking to the AI. Check console for details.";
+        console.error("Fetch error:", err);
+      }
+    }
+  </script>
 </body>
 </html>
