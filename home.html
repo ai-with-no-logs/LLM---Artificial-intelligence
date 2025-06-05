@@ -1,1 +1,62 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Site</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        /* Custom styles for the blue sections to mimic the image (though not used in this version) */
+        .blue-section {
+            background-color: #3b82f6; /* Tailwind blue-500 */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-blue-600 shadow-lg text-white p-4">
+        <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+            <!-- Site Title Placeholder - Left empty as per request -->
+            <div class="text-2xl font-bold mb-4 md:mb-0"></div>
+            <!-- Navigation Links -->
+            <div class="flex space-x-6">
+                <a href="javascript:void(0);" class="text-white hover:text-blue-200 transition duration-300">Home</a>
+                <a href="javascript:void(0);" class="text-white hover:text-blue-200 transition duration-300">About</a>
+                <a href="javascript:void(0);" class="text-white hover:text-blue-200 transition duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Contact Us Section Card - This is the only remaining content section -->
+        <section class="bg-white rounded-lg shadow-xl p-8 mb-8">
+            <!-- Card Title placeholder for "Contact Us" -->
+            <div class="text-3xl font-extrabold text-gray-800 text-center mb-6">Contact Us</div>
+            <!-- Subtitle/instruction placeholder -->
+            <div class="text-gray-600 text-center mb-4">If you have any questions or need further information, please don't hesitate to reach out.</div>
+            <!-- Email placeholder with icon -->
+            <div class="bg-blue-100 text-blue-800 rounded-full py-3 px-6 inline-flex items-center space-x-2 shadow-sm hover:bg-blue-200 transition duration-300 cursor-pointer mx-auto block w-fit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M2.929 1.929A4 4 0 015.757 1h8.486a4 4 0 012.828 1.172L19 4.343V15a2 2 0 01-2 2H3a2 2 0 01-2-2V4.343l1.929-2.414zM4.757 3.257A2 2 0 004 4.343V15h12V4.343a2 2 0 00-.757-1.086L10 8l-5.243-4.743zM16.586 2l1.414 1.414L10 8l-8 7.243V4.343a2 2 0 01-.586-1.414L2.414 2 10 8l6.586-6z" clip-rule="evenodd" />
+                </svg>
+                <span>Email: githubpages20124j01@outlook.com</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white p-6 shadow-inner mt-auto">
+        <div class="container mx-auto text-center">
+            <!-- Footer Content Placeholder - Left empty as per request -->
+            <div class="text-lg"></div>
+        </div>
+    </footer>
+</body>
+</html>
