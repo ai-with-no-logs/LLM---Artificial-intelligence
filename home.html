@@ -188,129 +188,6 @@
             text-decoration: underline; /* hover:underline */
         }
 
-        /* Admin Dashboard Section */
-        #adminDashboard {
-            background-image: linear-gradient(to right, #f3e8ff, #fae8ff); /* from-purple-100 to-pink-100 */
-            padding: 2rem; /* p-8 */
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-            margin-top: 2rem; /* mt-8 */
-        }
-
-        #adminDashboard .flex-between-center {
-            display: flex; /* flex */
-            justify-content: space-between; /* justify-between */
-            align-items: center; /* items-center */
-            margin-bottom: 1.5rem; /* mb-6 */
-        }
-
-        #adminDashboard h2 {
-            font-size: 1.875rem; /* text-3xl */
-            line-height: 2.25rem;
-            font-weight: 600; /* font-semibold */
-            color: #111827; /* text-gray-900 */
-        }
-
-        #adminDashboard button {
-            padding-top: 0.5rem; /* py-2 */
-            padding-bottom: 0.5rem; /* py-2 */
-            padding-left: 1rem; /* px-4 */
-            padding-right: 1rem; /* px-4 */
-            font-weight: 700; /* font-bold */
-            color: #ffffff; /* text-white */
-            border-radius: 0.5rem; /* rounded-lg */
-            transition-property: background-color; /* transition */
-            transition-duration: 300ms; /* duration-300 */
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            border: none; /* Remove default button border */
-            cursor: pointer;
-        }
-
-        #logoutBtn {
-            background-color: #ef4444; /* bg-red-500 */
-        }
-
-        #logoutBtn:hover {
-            background-color: #dc2626; /* hover:bg-red-600 */
-        }
-
-        #adminDashboard .info-box, #adminDashboard .edit-box {
-            background-color: #ffffff; /* bg-white */
-            padding: 1.5rem; /* p-6 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner */
-            margin-bottom: 1.5rem; /* mb-6 */
-        }
-
-        #adminDashboard .info-box h3, #adminDashboard .edit-box h3 {
-            font-size: 1.5rem; /* text-2xl */
-            line-height: 2rem;
-            font-weight: 500; /* font-medium */
-            margin-bottom: 1rem; /* mb-4 */
-            color: #1f2937; /* text-gray-800 */
-        }
-
-        #adminDashboard .info-box p {
-            font-size: 1.125rem; /* text-lg */
-            color: #374151; /* text-gray-700 */
-        }
-
-        #adminDashboard .info-box p strong {
-            font-weight: 700; /* font-bold */
-        }
-
-        #adminDashboard .info-box p.mt-2 {
-            margin-top: 0.5rem; /* mt-2 */
-        }
-
-        #adminDashboard label {
-            display: block; /* block */
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 500; /* font-medium */
-            color: #374151; /* text-gray-700 */
-            margin-bottom: 0.5rem; /* mb-2 */
-        }
-
-        #adminDashboard textarea {
-            width: 100%; /* w-full */
-            padding: 0.75rem; /* p-3 */
-            border: 1px solid #d1d5db; /* border border-gray-300 */
-            border-radius: 0.375rem; /* rounded-md */
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-            outline: none; /* focus:outline-none */
-            color: #1f2937; /* text-gray-800 */
-        }
-
-        #adminDashboard textarea:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6; /* focus:ring-2 focus:ring-blue-500 */
-            border-color: #3b82f6; /* focus:border-blue-500 */
-        }
-
-        #adminDashboard .edit-box p.text-sm {
-            font-size: 0.875rem; /* text-sm */
-            line-height: 1.25rem;
-            color: #6b7280; /* text-gray-500 */
-            margin-top: 0.5rem; /* mt-2 */
-        }
-
-        #saveContentBtn {
-            margin-top: 1rem; /* mt-4 */
-            background-color: #3b82f6; /* bg-blue-500 */
-        }
-
-        #saveContentBtn:hover {
-            background-color: #2563eb; /* hover:bg-blue-600 */
-        }
-
-        #saveMessage {
-            margin-top: 0.75rem; /* mt-3 */
-            color: #22c55e; /* text-green-600 */
-            font-weight: 600; /* font-semibold */
-        }
-
         /* Footer Section */
         footer {
             background-color: #1f2937; /* bg-gray-800 */
@@ -326,142 +203,9 @@
             text-align: center; /* text-center */
             font-size: 0.875rem; /* text-sm */
         }
-
-        /* Modal specific styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            display: flex; /* flex */
-            justify-content: center; /* justify-content: center */
-            align-items: center; /* align-items: center */
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 2.5rem; /* p-10 (40px) */
-            border-radius: 1rem; /* rounded-xl (16px) */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-            position: relative;
-            max-width: 90%;
-            width: 400px;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            color: #aaa;
-            font-size: 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Login Form */
-        #loginModal h2 {
-            font-size: 1.875rem; /* text-3xl */
-            line-height: 2.25rem;
-            font-weight: 700; /* font-bold */
-            margin-bottom: 1.5rem; /* mb-6 */
-            text-align: center; /* text-center */
-            color: #111827; /* text-gray-900 */
-        }
-
-        #loginForm .mb-4 {
-            margin-bottom: 1rem; /* mb-4 */
-        }
-
-        #loginForm .mb-6 {
-            margin-bottom: 1.5rem; /* mb-6 */
-        }
-
-        #loginForm label {
-            display: block; /* block */
-            color: #374151; /* text-gray-700 */
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 700; /* font-bold */
-            margin-bottom: 0.5rem; /* mb-2 */
-        }
-
-        #loginForm input[type="text"],
-        #loginForm input[type="password"] {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow */
-            appearance: none; /* appearance-none */
-            border: 1px solid #d1d5db; /* border */
-            border-radius: 0.5rem; /* rounded-lg */
-            width: 100%; /* w-full */
-            padding-top: 0.75rem; /* py-3 */
-            padding-bottom: 0.75rem; /* py-3 */
-            padding-left: 1rem; /* px-4 */
-            padding-right: 1rem; /* px-4 */
-            color: #374151; /* text-gray-700 */
-            line-height: 1.25; /* leading-tight */
-            outline: none; /* focus:outline-none */
-        }
-
-        #loginForm input:focus {
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), 0 0 0 5px #3b82f6; /* focus:shadow-outline focus:ring-2 focus:ring-blue-500 */
-        }
-
-        #loginForm input.mb-3 {
-            margin-bottom: 0.75rem; /* mb-3 */
-        }
-
-        #loginError {
-            color: #ef4444; /* text-red-500 */
-            text-align: center; /* text-center */
-            font-size: 0.875rem; /* text-sm */
-            margin-bottom: 1rem; /* mb-4 */
-        }
-
-        #loginForm .flex-center {
-            display: flex; /* flex */
-            align-items: center; /* items-center */
-            justify-content: center; /* justify-center */
-        }
-
-        #loginForm button[type="submit"] {
-            background-color: #2563eb; /* bg-blue-600 */
-            padding-top: 0.75rem; /* py-3 */
-            padding-bottom: 0.75rem; /* py-3 */
-            padding-left: 1.5rem; /* px-6 */
-            padding-right: 1.5rem; /* px-6 */
-            color: #ffffff; /* text-white */
-            font-weight: 700; /* font-bold */
-            border-radius: 0.5rem; /* rounded-lg */
-            outline: none; /* focus:outline-none */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            transition-property: background-color; /* transition */
-            transition-duration: 300ms; /* duration-300 */
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
-            border: none;
-            cursor: pointer;
-        }
-
-        #loginForm button[type="submit"]:hover {
-            background-color: #1d4ed8; /* hover:bg-blue-700 */
-        }
-
-        /* Utility class for hiding elements */
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
-<body class="antialiased text-gray-800">
+<body>
     <header>
         <div class="container">
             <h1>My Awesome Site</h1>
@@ -470,14 +214,14 @@
                     <li><a href="#" class="nav-link">Home</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
-                    </ul>
+                </ul>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <section id="about">
-            <h2 class="text-4xl font-semibold mb-6 text-center text-gray-900">Welcome to Our Site!</h2>
+            <h2>Welcome to Our Site!</h2>
             <div class="grid-cols-2">
                 <div class="space-y-4">
                     <p>
@@ -502,39 +246,9 @@
                     If you have any questions or need further information, please don't hesitate to reach out.
                 </p>
                 <div class="email-info">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 1a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2V9z"></path></svg>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 1a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2V9z"></path></svg>
                     <span>Email: <a href="mailto:githubpages20124j01@outlook.com">githubpages20124j01@outlook.com</a></span>
                 </div>
-            </div>
-        </section>
-
-        <section id="adminDashboard" class="hidden">
-            <div class="flex-between-center">
-                <h2>Admin Dashboard</h2>
-                <button id="logoutBtn">
-                    Logout
-                </button>
-            </div>
-            <div class="info-box">
-                <h3>Account Information (Simulated)</h3>
-                <p><strong>Username:</strong> admin</p>
-                <p><strong>Email:</strong> admin@example.com</p>
-                <p class="mt-2">
-                    This information is static for demonstration purposes. In a real application, this would be fetched from a database.
-                </p>
-            </div>
-
-            <div class="edit-box">
-                <h3>Edit Website Content (Simulated)</h3>
-                <label for="siteContent">Main Site Content:</label>
-                <textarea id="siteContent" rows="8"></textarea>
-                <p class="text-sm">
-                    Changes made here are purely visual and will not persist after refreshing the page or navigating away, as this is a client-side only demonstration.
-                </p>
-                <button id="saveContentBtn">
-                    Save Simulated Content
-                </button>
-                <div id="saveMessage" class="hidden">Content saved visually!</div>
             </div>
         </section>
     </main>
@@ -545,113 +259,5 @@
         </div>
     </footer>
 
-    <div id="loginModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-button" id="closeModalBtn">&times;</span>
-            <h2>Admin Login</h2>
-            <form id="loginForm">
-                <div class="mb-4">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                </div>
-                <div class="mb-6">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="******************" required>
-                </div>
-                <div id="loginError" class="hidden">Invalid username or password.</div>
-                <div class="flex-center">
-                    <button type="submit">
-                        Log In
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get DOM elements
-            // Note: loginBtn from header is removed, but we still need a way to open the modal for demonstration.
-            // For this example, I'll add a 'hidden' trigger for the login modal if you still want to test it.
-            // Or you can re-add a button elsewhere if desired.
-            const loginModal = document.getElementById('loginModal');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const loginForm = document.getElementById('loginForm');
-            const usernameInput = document.getElementById('username');
-            const passwordInput = document.getElementById('password');
-            const loginError = document.getElementById('loginError');
-            const adminDashboard = document.getElementById('adminDashboard');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const saveContentBtn = document.getElementById('saveContentBtn');
-            const siteContentTextarea = document.getElementById('siteContent');
-            const saveMessage = document.getElementById('saveMessage');
-
-            // Hardcoded credentials (HIGHLY INSECURE for real applications)
-            const ADMIN_USERNAME = 'admin';
-            const ADMIN_PASSWORD = 'dsfalkjsjdfjklasdjkf34'; // The password you provided
-
-            // Function to show the login modal
-            function showLoginModal() {
-                loginModal.classList.remove('hidden'); // Use classList for toggling
-                // Reset form and error message
-                loginForm.reset();
-                loginError.classList.add('hidden');
-            }
-
-            // Function to hide the login modal
-            function hideLoginModal() {
-                loginModal.classList.add('hidden'); // Use classList for toggling
-            }
-
-            // You can add a button or event listener elsewhere to trigger showLoginModal() if needed.
-            // For example, if you wanted to click "Contact Us" to open login (just an example):
-            // document.getElementById('contact').addEventListener('click', showLoginModal);
-
-
-            // Event listener for closing the modal using the 'x' button
-            closeModalBtn.addEventListener('click', hideLoginModal);
-
-            // Event listener for closing the modal when clicking outside of it
-            window.addEventListener('click', function(event) {
-                if (event.target === loginModal) {
-                    hideLoginModal();
-                }
-            });
-
-            // Event listener for login form submission
-            loginForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                const enteredUsername = usernameInput.value;
-                const enteredPassword = passwordInput.value;
-
-                if (enteredUsername === ADMIN_USERNAME && enteredPassword === ADMIN_PASSWORD) {
-                    // Successful login
-                    hideLoginModal();
-                    adminDashboard.classList.remove('hidden'); // Show the admin dashboard
-                    loginError.classList.add('hidden'); // Hide any previous error
-                    // Optionally, you could load "editable" content into the textarea here
-                } else {
-                    // Failed login
-                    loginError.classList.remove('hidden'); // Show error message
-                }
-            });
-
-            // Event listener for logout button
-            logoutBtn.addEventListener('click', function() {
-                adminDashboard.classList.add('hidden'); // Hide the admin dashboard
-                saveMessage.classList.add('hidden'); // Hide save message on logout
-            });
-
-            // Event listener for saving simulated content
-            saveContentBtn.addEventListener('click', function() {
-                console.log('Simulated content saved:', siteContentTextarea.value);
-                saveMessage.classList.remove('hidden');
-                setTimeout(() => {
-                    saveMessage.classList.add('hidden');
-                }, 3000); // Hide message after 3 seconds
-            });
-        });
-    </script>
-</body>
+    </body>
 </html>
