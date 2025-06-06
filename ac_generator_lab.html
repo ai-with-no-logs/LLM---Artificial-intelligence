@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Generator Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Slate -->
+    <!-- Application Structure Plan: This single-page application is designed to transform the static report into an engaging learning tool. It's structured into two main parts: 1) "The Core Principles" section, which clearly explains the foundational concepts from the source text, providing essential context. 2) The "Interactive Generator Lab," which is the core of the application. This lab replaces the static table with a hands-on simulator. Users can manipulate sliders representing the key factors (magnetic strength, coil turns, coil area) and see the immediate effect on voltage, displayed both numerically and graphically. A logging feature allows users to record their experimental results. This structure was chosen to facilitate active learning and discovery, making the abstract physical principles tangible and intuitive, which is far more effective for understanding than passive reading. -->
+    <!-- Visualization & Content Choices: Report Info: The three factors affecting generator voltage (magnetic field strength, number of coil turns, coil area). -> Goal: To allow users to intuitively understand and quantify the relationship between these factors and the resulting voltage. -> Viz/Presentation Method: The core interaction relies on HTML range sliders for user input, providing a tactile way to change variables. The output is presented dually: a large, clear numerical display shows the precise voltage, while a simple, dynamic Chart.js vertical bar chart provides an immediate visual representation of the voltage magnitude. -> Interaction: As a user adjusts any of the three sliders, the voltage calculation is run in real-time, and both the numerical display and the bar chart update instantly. A button allows users to "log" a specific configuration, which dynamically adds a row to a results table at the bottom. -> Justification: This instant feedback loop is critical for demonstrating cause and effect. Using both a number and a chart caters to different cognitive styles. The log table directly corresponds to the source document's objective of recording results, but makes the process interactive and user-driven. -> Library/Method: Vanilla JavaScript handles all state management, calculations, and DOM manipulation. Chart.js is used for the responsive canvas-based bar chart. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4f46e5;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #4f46e5;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
 
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-700">Interactive AC Generator Lab</h1>
+            <p class="mt-2 text-lg text-slate-600">Discover how to increase generator voltage without spinning it faster.</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left Column: Principles & Controls -->
+            <div class="lg:col-span-1 space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-bold mb-4 text-slate-900">The Core Principles</h2>
+                    <p class="text-slate-600 mb-4">
+                        The voltage produced by an AC generator is determined by how quickly the coil cuts through the magnet's field lines. While spinning the generator faster works, it also changes the frequency. To increase voltage while maintaining the same speed (and frequency), you can improve three key factors:
+                    </p>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 font-bold mr-3">1.</span>
+                            <div>
+                                <h3 class="font-semibold">Strength of the Magnetic Field</h3>
+                                <p class="text-sm text-slate-500">A stronger magnet creates a denser magnetic field, inducing more voltage.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 font-bold mr-3">2.</span>
+                             <div>
+                                <h3 class="font-semibold">Number of Turns in the Coil</h3>
+                                <p class="text-sm text-slate-500">More loops of wire mean more of the coil is cutting through the field at any time.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-500 font-bold mr-3">3.</span>
+                             <div>
+                                <h3 class="font-semibold">Area of the Coil</h3>
+                                <p class="text-sm text-slate-500">A larger coil can capture more magnetic flux, increasing the potential voltage.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-bold mb-4 text-slate-900">Generator Controls</h2>
+                     <p class="text-slate-600 mb-6">
+                        Adjust the sliders below to configure your virtual generator. Observe how each change impacts the voltage output on the right.
+                    </p>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="strength" class="flex justify-between font-semibold text-slate-700">
+                                <span>Magnetic Strength</span><span id="strengthValue" class="font-bold text-indigo-600">50%</span>
+                            </label>
+                            <input type="range" id="strength" min="1" max="100" value="50" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                        <div>
+                            <label for="turns" class="flex justify-between font-semibold text-slate-700">
+                                <span>Coil Turns</span><span id="turnsValue" class="font-bold text-indigo-600">550</span>
+                            </label>
+                            <input type="range" id="turns" min="100" max="1000" value="550" step="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                        <div>
+                            <label for="area" class="flex justify-between font-semibold text-slate-700">
+                                <span>Coil Area (cm²)</span><span id="areaValue" class="font-bold text-indigo-600">55</span>
+                            </label>
+                            <input type="range" id="area" min="10" max="100" value="55" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Visualization & Logging -->
+            <div class="lg:col-span-2 space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <h2 class="text-xl font-bold mb-2 text-slate-900">Live Voltage Output</h2>
+                    <p class="text-slate-600 mb-4">This chart shows the real-time voltage based on your settings.</p>
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                        <div class="text-center">
+                             <p class="text-lg text-slate-500">Voltage Produced</p>
+                            <p id="voltageOutput" class="text-6xl font-bold text-indigo-700 my-4">15.13 V</p>
+                            <button id="logButton" class="w-full md:w-auto bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700 transition-colors shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Add to Experiment Log
+                            </button>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="voltageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                     <h2 class="text-xl font-bold mb-4 text-slate-900">Experiment Log</h2>
+                      <p class="text-slate-600 mb-4">
+                        Here are the results of your experiments. See if you can find the configuration that produces the highest voltage!
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-left text-slate-500">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 rounded-l-lg">Strength (%)</th>
+                                    <th scope="col" class="px-6 py-3">Turns</th>
+                                    <th scope="col" class="px-6 py-3">Area (cm²)</th>
+                                    <th scope="col" class="px-6 py-3 rounded-r-lg">Voltage (V)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logTableBody">
+                                <!-- Logged data will be inserted here -->
+                            </tbody>
+                        </table>
+                         <p id="noLogsMessage" class="text-center text-slate-500 py-8">Your logged experiments will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const strengthSlider = document.getElementById('strength');
+        const turnsSlider = document.getElementById('turns');
+        const areaSlider = document.getElementById('area');
+        
+        const strengthValue = document.getElementById('strengthValue');
+        const turnsValue = document.getElementById('turnsValue');
+        const areaValue = document.getElementById('areaValue');
+        
+        const voltageOutput = document.getElementById('voltageOutput');
+        const logButton = document.getElementById('logButton');
+        const logTableBody = document.getElementById('logTableBody');
+        const noLogsMessage = document.getElementById('noLogsMessage');
+
+        let voltageChart;
+
+        function calculateVoltage() {
+            const strength = parseFloat(strengthSlider.value);
+            const turns = parseFloat(turnsSlider.value);
+            const area = parseFloat(areaSlider.value);
+
+            const voltage = (strength / 10) * (turns / 100) * (area / 10);
+            return voltage.toFixed(2);
+        }
+
+        function updateUI() {
+            const strength = strengthSlider.value;
+            const turns = turnsSlider.value;
+            const area = areaSlider.value;
+
+            strengthValue.textContent = `${strength}%`;
+            turnsValue.textContent = turns;
+            areaValue.textContent = `${area}`;
+            
+            const voltage = calculateVoltage();
+            voltageOutput.textContent = `${voltage} V`;
+            
+            updateChart(voltage);
+        }
+
+        function updateChart(voltage) {
+            voltageChart.data.datasets[0].data[0] = voltage;
+            voltageChart.update();
+        }
+
+        function logExperiment() {
+            const strength = strengthSlider.value;
+            const turns = turnsSlider.value;
+            const area = areaSlider.value;
+            const voltage = calculateVoltage();
+
+            const newRow = document.createElement('tr');
+            newRow.className = 'bg-white border-b';
+            newRow.innerHTML = `
+                <td class="px-6 py-4 font-medium text-slate-900">${strength}</td>
+                <td class="px-6 py-4">${turns}</td>
+                <td class="px-6 py-4">${area}</td>
+                <td class="px-6 py-4 font-bold text-indigo-600">${voltage}</td>
+            `;
+            logTableBody.appendChild(newRow);
+            noLogsMessage.style.display = 'none';
+        }
+
+        function initializeChart() {
+            const ctx = document.getElementById('voltageChart').getContext('2d');
+            voltageChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Voltage'],
+                    datasets: [{
+                        label: 'Voltage (V)',
+                        data: [0],
+                        backgroundColor: ['rgba(79, 70, 229, 0.8)'],
+                        borderColor: ['rgba(79, 70, 229, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'x',
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Voltage (V)'
+                            }
+                        },
+                         x: {
+                            display: false,
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    }
+                }
+            });
+        }
+
+        strengthSlider.addEventListener('input', updateUI);
+        turnsSlider.addEventListener('input', updateUI);
+        areaSlider.addEventListener('input', updateUI);
+        logButton.addEventListener('click', logExperiment);
+
+        window.onload = () => {
+            initializeChart();
+            updateUI();
+        };
+    </script>
+</body>
+</html>
