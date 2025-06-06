@@ -54,20 +54,20 @@
     <!-- Top Navigation Bar -->
     <nav class="bg-indigo-800 text-white p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="home.html" class="text-2xl font-bold text-white hover:text-indigo-200 transition-colors">
+            <a href="home" class="text-2xl font-bold text-white hover:text-indigo-200 transition-colors">
                 LLM - Artificial Intelligence
             </a>
             <button id="menu-button" class="lg:hidden text-white focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
             <div id="nav-links" class="hidden lg:flex space-x-6">
-                <a href="home.html" class="hover:text-indigo-200 transition-colors">Home</a>
-                <a href="ac_generator_lab.html" class="font-bold text-indigo-200">Interactive AC Generator Lab</a>
+                <a href="home" class="hover:text-indigo-200 transition-colors">Home</a>
+                <a href="acgenerator" class="font-bold text-indigo-200">Interactive AC Generator Lab</a>
             </div>
         </div>
         <div id="mobile-menu" class="hidden lg:hidden mt-4 space-y-2">
-            <a href="home.html" class="block px-4 py-2 text-sm hover:bg-indigo-700 rounded-md">Home</a>
-            <a href="ac_generator_lab.html" class="block px-4 py-2 text-sm font-bold bg-indigo-700 rounded-md">Interactive AC Generator Lab</a>
+            <a href="home" class="block px-4 py-2 text-sm hover:bg-indigo-700 rounded-md">Home</a>
+            <a href="acgenerator" class="block px-4 py-2 text-sm font-bold bg-indigo-700 rounded-md">Interactive AC Generator Lab</a>
         </div>
     </nav>
 
@@ -295,6 +295,7 @@
         areaSlider.addEventListener('input', updateUI);
         logButton.addEventListener('click', logExperiment);
 
+        // Toggle mobile menu visibility
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
